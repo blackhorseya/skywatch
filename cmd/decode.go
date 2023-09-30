@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"encoding/binary"
+	"encoding/json"
 	"fmt"
 	"math"
 
@@ -36,7 +37,10 @@ var decodeCmd = &cobra.Command{
 
 		decoded, _, err := decodeMessagePack(data)
 		cobra.CheckErr(err)
-		fmt.Printf("%+v\n", decoded)
+
+		bytes, err := json.Marshal(decoded)
+		cobra.CheckErr(err)
+		fmt.Println(string(bytes))
 	},
 }
 
