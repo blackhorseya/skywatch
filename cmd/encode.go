@@ -10,12 +10,11 @@ import (
 var encodeCmd = &cobra.Command{
 	Use:   "encode",
 	Short: "A brief description of your command",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("encode called")
-	},
 }
 
 func init() {
+	encodeCmd.AddCommand(encodeJsonCmd)
+
 	rootCmd.AddCommand(encodeCmd)
 
 	// Here you will define your flags and configuration settings.
@@ -27,4 +26,15 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// encodeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+var encodeJsonCmd = &cobra.Command{
+	Use:   "json",
+	Short: "Encode JSON",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		input := args[0]
+
+		fmt.Println("encode json called", input)
+	},
 }
